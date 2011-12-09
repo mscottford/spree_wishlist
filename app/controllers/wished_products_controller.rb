@@ -12,8 +12,14 @@ class WishedProductsController < Spree::BaseController
       @wished_product.save
     end
 
+    Rails.logger.warn("Requested format: #{request.format.inspect}")
+    Rails.logger.warn("Wishlist URL: #{wishlist_url(@wishlist).inspect}")
+
     respond_with(@wished_product) do |format|
-      format.html { redirect_to wishlist_url(@wishlist) }
+      format.html { 
+        Rails.logger.warn('Inside html format before redirect.')
+        redirect_to wishlist_url(@wishlist) 
+      }
     end
   end
 
